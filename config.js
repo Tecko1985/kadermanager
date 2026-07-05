@@ -1,10 +1,4 @@
-const APP_VERSION = "1.2";
-
-// Gruppen-Id (Tools-Übersicht-Benutzerverwaltung) für Nutzer ohne Admin-Status,
-// die als Trainer/Betreuer/Kassenwart verwalten dürfen (Teams, Kader, Termine,
-// Umfragen, Kasse — und Teilnahme/Stimmen für JEDEN Spieler setzen). Mitgliederpflege
-// dort, nicht hier.
-const EDITOR_GROUP_ID = "spielerplus-bearbeiter";
+const APP_VERSION = "1.3";
 
 // Termin-Typen — Reihenfolge bestimmt die Auswahl-Reihenfolge im Formular.
 const TERMIN_TYPEN = [
@@ -31,6 +25,17 @@ const DEFAULT_STRAFEN = [
 ];
 
 const APP_CHANGELOG = [
+  {
+    version: "1.3",
+    groups: [
+      {
+        title: "Rechte",
+        items: [
+          "Bearbeiten-Rechte werden jetzt über die Gruppenverwaltung der Tools-Übersicht vergeben, statt über eine feste Bearbeiter-Gruppe."
+        ]
+      }
+    ]
+  },
   {
     version: "1.2",
     groups: [

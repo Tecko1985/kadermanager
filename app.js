@@ -174,8 +174,7 @@ function seedTeam(name, farbe) {
 function currentTeam() { return appData.teams.find((t) => t.id === currentTeamId) || null; }
 function canManage() {
   if (!currentUser) return false;
-  if (currentUser.isAdmin) return true;
-  return (currentUser.groupIds || []).includes(EDITOR_GROUP_ID);
+  return currentUser.isAdmin || !!currentUser.canEdit;
 }
 function myUsername() { return currentUser && currentUser.username ? currentUser.username : null; }
 function myPlayerId(team) {
