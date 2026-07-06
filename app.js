@@ -24,6 +24,11 @@ function todayISO() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
+function addDaysISO(iso, days) {
+  const d = new Date(iso + "T00:00:00");
+  d.setDate(d.getDate() + days);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
 function zeitText(t) {
   if (!t.startZeit) return "";
   return t.endZeit ? `${t.startZeit}–${t.endZeit} Uhr` : `${t.startZeit} Uhr`;
@@ -395,12 +400,19 @@ function openTerminModal(id) {
   document.getElementById("ef-treffpunkt").value = t ? t.treffpunkt : "";
   document.getElementById("ef-notiz").value = t ? t.notiz : "";
   document.getElementById("btn-delete-termin").classList.toggle("hidden", !t);
+  document.getElementById("ef-zyklisch-wrap").classList.toggle("hidden", !!t);
+  document.getElementById("ef-zyklisch").checked = false;
+  document.getElementById("ef-wochen").value = "";
   updateGegnerVisibility();
+  updateZyklischVisibility();
   document.getElementById("termin-modal").classList.remove("hidden");
   document.getElementById("ef-datum").focus();
 }
 function updateGegnerVisibility() {
   document.getElementById("ef-gegner-field").style.display = val("ef-typ") === "spiel" ? "" : "none";
+}
+function updateZyklischVisibility() {
+  document.getElementById("ef-wochen-field").classList.toggle("hidden", !checked("ef-zyklisch"));
 }
 function closeTerminModal() { document.getElementById("termin-modal").classList.add("hidden"); editingTerminId = null; }
 function saveTermin() {
@@ -408,6 +420,13 @@ function saveTermin() {
   if (!team) return;
   const datum = val("ef-datum");
   if (!datum) { alert("Bitte ein Datum angeben."); return; }
+  const zyklisch = !editingTerminId && checked("ef-zyklisch");
+  let wochen = 1;
+  if (zyklisch) {
+    wochen = parseInt(val("ef-wochen"), 10);
+    if (!wochen || wochen < 2) { alert("Bitte bei „Wöchentlich wiederholen“ eine Anzahl Wochen von mindestens 2 angeben."); return; }
+    if (wochen > 52) wochen = 52;
+  }
   let t = editingTerminId ? team.termine.find((x) => x.id === editingTerminId) : null;
   if (!t) { t = { id: uuid(), teilnahme: {} }; team.termine.push(t); }
   t.typ = val("ef-typ");
@@ -419,6 +438,13 @@ function saveTermin() {
   t.gegner = t.typ === "spiel" ? val("ef-gegner").trim() : "";
   t.treffpunkt = val("ef-treffpunkt").trim();
   t.notiz = val("ef-notiz").trim();
+  for (let i = 1; i < wochen; i++) {
+    team.termine.push({
+      id: uuid(), typ: t.typ, titel: t.titel, datum: addDaysISO(datum, i * 7),
+      startZeit: t.startZeit, endZeit: t.endZeit, ort: t.ort,
+      gegner: t.gegner, treffpunkt: t.treffpunkt, notiz: t.notiz, teilnahme: {}
+    });
+  }
   persist();
   renderTermine();
   closeTerminModal();
@@ -1079,6 +1105,7 @@ function setupListeners() {
 
   // Termin-Modal
   document.getElementById("ef-typ").addEventListener("change", updateGegnerVisibility);
+  document.getElementById("ef-zyklisch").addEventListener("change", updateZyklischVisibility);
   document.getElementById("termin-modal-close").addEventListener("click", closeTerminModal);
   document.getElementById("btn-cancel-termin").addEventListener("click", closeTerminModal);
   document.getElementById("btn-save-termin").addEventListener("click", saveTermin);

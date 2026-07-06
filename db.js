@@ -3,7 +3,7 @@
 // Gateway ohne lokalen Datei-Modus.
 const GATEWAY_URL = "https://landingpage.michel-brunner.workers.dev";
 const TOKEN_STORAGE_KEY = "tu_session_token";
-const GATEWAY_APP_ID = "spielerplus-klon";
+const GATEWAY_APP_ID = "kadermanager";
 
 class NotLoggedInError extends Error {
   constructor(message) {

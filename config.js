@@ -1,4 +1,4 @@
-const APP_VERSION = "1.3";
+const APP_VERSION = "1.4";
 
 // Termin-Typen — Reihenfolge bestimmt die Auswahl-Reihenfolge im Formular.
 const TERMIN_TYPEN = [
@@ -25,6 +25,23 @@ const DEFAULT_STRAFEN = [
 ];
 
 const APP_CHANGELOG = [
+  {
+    version: "1.4",
+    groups: [
+      {
+        title: "Termine",
+        items: [
+          "Neue Termine können jetzt wöchentlich wiederholt angelegt werden (Checkbox „Wöchentlich wiederholen“ + Anzahl Wochen) — praktisch für feste Trainingstermine."
+        ]
+      },
+      {
+        title: "Umbenennung",
+        items: [
+          "Die App heißt jetzt „Kadermanager“ (bisher Spielerplus-Klon) — reine Umbenennung von Name, Adresse und interner Kennung, keine Änderung an bestehenden Daten oder Rechten."
+        ]
+      }
+    ]
+  },
   {
     version: "1.3",
     groups: [

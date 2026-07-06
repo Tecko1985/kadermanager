@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>⚽ Spielerplus</title>
+<title>⚽ Kadermanager</title>
 <meta name="theme-color" content="#1a56a0" />
-<link rel="stylesheet" href="style.css?v=1.3" />
+<link rel="stylesheet" href="style.css?v=1.4" />
 </head>
 <body>
 
   <div class="connect-screen" id="connect-screen">
     <div class="card">
-      <h2>⚽ Spielerplus</h2>
+      <h2>⚽ Kadermanager</h2>
       <p id="connect-message">Bitte über die Tools-Übersicht anmelden, um die Teamorganisation zu sehen.</p>
       <div class="btn-row">
         <a class="btn" href="https://tecko1985.github.io/ToolsUebersicht/">Zur Tools-Übersicht</a>
@@ -22,7 +22,7 @@
 
   <div id="app-shell" style="display:none;">
     <header>
-      <h1>⚽ Spielerplus <span class="version-badge" id="version-badge"></span></h1>
+      <h1>⚽ Kadermanager <span class="version-badge" id="version-badge"></span></h1>
       <a href="https://tecko1985.github.io/ToolsUebersicht/" class="back-to-dashboard">← Zurück zum Dashboard</a>
       <div class="header-right">
         <label class="season-picker">Mannschaft
@@ -236,6 +236,13 @@
             <div class="form-field"><label>Treffpunkt</label><input type="text" id="ef-treffpunkt" placeholder="z. B. 30 Min. vorher" /></div>
           </div>
           <div class="form-field wide"><label>Notiz</label><input type="text" id="ef-notiz" placeholder="optional" /></div>
+          <div id="ef-zyklisch-wrap">
+            <label class="checkbox-row" style="margin-top:10px;"><input type="checkbox" id="ef-zyklisch" /> Wöchentlich wiederholen</label>
+            <div class="form-field hidden" id="ef-wochen-field" style="max-width:200px;margin-top:10px;">
+              <label>Anzahl Wochen</label>
+              <input type="number" id="ef-wochen" min="2" max="52" placeholder="z. B. 10" />
+            </div>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -332,8 +339,8 @@
     </div>
   </div>
 
-  <script src="config.js?v=1.3"></script>
-  <script src="db.js?v=1.3"></script>
-  <script src="app.js?v=1.3"></script>
+  <script src="config.js?v=1.4"></script>
+  <script src="db.js?v=1.4"></script>
+  <script src="app.js?v=1.4"></script>
 </body>
 </html>
