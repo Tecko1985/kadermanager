@@ -1,4 +1,4 @@
-const APP_VERSION = "2.1";
+const APP_VERSION = "2.2";
 
 // TeamCloud: Server-Cap (muss zum admin-worker.js-Limit passen) + rein informative
 // Kontingent-Anzeige (kein hartes Limit über die 10 MB je Datei hinaus).
@@ -56,6 +56,22 @@ const KADER_ROLLEN = [
 // 2-5 Verantwortlichen reichen diese 10 Bereiche.
 const RECHTE_BEREICHE = ["termine", "aufgaben", "aufstellungen", "gruppen", "spielberichte", "kader", "kasse", "urlaubkrank", "teamcloud", "team"];
 
+// Anzeige-Labels für die Rechte-Übersichtstabelle im Einstellungen-Tab. "team" deckt
+// im Code sowohl Mannschafts-Verwaltung als auch Umfragen ab (siehe hasRecht-Aufrufe
+// in app.js), daher der zusammengesetzte Label-Text.
+const RECHTE_BEREICH_LABELS = {
+  termine: "Termine",
+  aufgaben: "Aufgaben",
+  aufstellungen: "Aufstellungen",
+  gruppen: "Gruppen",
+  spielberichte: "Spielberichte",
+  kader: "Kader (Spieler)",
+  kasse: "Kasse",
+  urlaubkrank: "Urlaub/Krank",
+  teamcloud: "Dateien",
+  team: "Mannschaften & Umfragen"
+};
+
 const ROLLEN_RECHTE = {
   admin: RECHTE_BEREICHE.slice(),
   trainer: ["termine", "aufgaben", "aufstellungen", "gruppen", "spielberichte", "urlaubkrank"],
@@ -71,6 +87,18 @@ const ROLLEN_RECHTE = {
 };
 
 const APP_CHANGELOG = [
+  {
+    version: "2.2",
+    groups: [
+      {
+        title: "Einstellungen",
+        items: [
+          "Neuer Bereich „Rollen im Kader“: alle Kadermitglieder der Mannschaft mit ihren Rollen auf einen Blick, mit Direktzugriff zum Bearbeiten.",
+          "Neue Referenztabelle „Rollen-Rechte“: zeigt auf einen Blick, welchen Bereich (Termine, Kasse, Aufstellung, …) jede Rolle verwalten darf."
+        ]
+      }
+    ]
+  },
   {
     version: "2.1",
     groups: [

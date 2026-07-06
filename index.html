@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>⚽ Kadermanager</title>
 <meta name="theme-color" content="#1a56a0" />
-<link rel="stylesheet" href="style.css?v=2.1" />
+<link rel="stylesheet" href="style.css?v=2.2" />
 </head>
 <body>
 
@@ -172,6 +172,17 @@
           </div>
           <div id="team-admin-list"></div>
           <p class="muted editor-only hidden" id="team-admin-empty" style="margin-top:8px;">Noch keine Mannschaft — oben „+ Mannschaft“ anlegen.</p>
+        </div>
+        <div class="card">
+          <h2 id="rechte-kader-title">Rollen im Kader</h2>
+          <p class="muted" style="margin-bottom:10px;">Rollen werden am jeweiligen Spieler im Kader-Tab vergeben — hier alle auf einen Blick, mit Direktzugriff zum Bearbeiten.</p>
+          <div class="table-scroll" id="rechte-kader-wrap"></div>
+          <p class="muted hidden" id="no-team-rechte" style="margin-top:8px;">Noch keine Mannschaft angelegt — oben unter „Mannschaften“ eine Mannschaft erstellen.</p>
+        </div>
+        <div class="card">
+          <h2>Rollen-Rechte</h2>
+          <p class="muted" style="margin-bottom:10px;">Welchen Bereich eine Rolle verwalten darf. Hat ein Spieler noch keine Rolle zugewiesen, darf er vorübergehend überall mitverwalten — erst eine zugewiesene Rolle schränkt gezielt ein.</p>
+          <div class="table-scroll" id="rechte-matrix-wrap"></div>
         </div>
         <div class="card">
           <h2>Info <span class="version-badge" id="version-badge-2"></span></h2>
@@ -477,8 +488,8 @@
     </div>
   </div>
 
-  <script src="config.js?v=2.1"></script>
-  <script src="db.js?v=2.1"></script>
-  <script src="app.js?v=2.1"></script>
+  <script src="config.js?v=2.2"></script>
+  <script src="db.js?v=2.2"></script>
+  <script src="app.js?v=2.2"></script>
 </body>
 </html>

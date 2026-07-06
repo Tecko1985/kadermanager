@@ -1204,6 +1204,7 @@ function saveSpieler() {
   persist();
   renderKader();
   renderTermine();
+  renderKaderRollenUebersicht();
   closeSpielerModal();
 }
 function deleteSpieler() {
@@ -1221,6 +1222,7 @@ function deleteSpieler() {
   if (fotoId) gatewayDeleteFile(fotoId);
   renderKader();
   renderTermine();
+  renderKaderRollenUebersicht();
   closeSpielerModal();
 }
 
@@ -1688,6 +1690,41 @@ function deleteTeam() {
   closeTeamModal();
 }
 
+// ---------- Einstellungen: Rechte & Rollen ----------
+function renderKaderRollenUebersicht() {
+  const wrap = document.getElementById("rechte-kader-wrap");
+  if (!wrap) return;
+  const team = teamOr("no-team-rechte", ["rechte-kader-wrap"]);
+  const titleEl = document.getElementById("rechte-kader-title");
+  if (!team) { wrap.innerHTML = ""; if (titleEl) titleEl.textContent = "Rollen im Kader"; return; }
+  if (titleEl) titleEl.textContent = `Rollen im Kader — ${team.name}`;
+  const manage = hasRecht(team, "kader");
+  const sorted = team.kader.slice().sort((a, b) => a.name.localeCompare(b.name));
+  const rows = sorted.map((s) => {
+    const rollenLabels = (s.rollen || []).map((r) => { const k = KADER_ROLLEN.find((x) => x.id === r); return k ? k.label : r; });
+    const chips = rollenLabels.length
+      ? rollenLabels.map((l) => `<span class="rolle-chip">${escapeHtml(l)}</span>`).join("")
+      : `<span class="muted">keine Rolle</span>`;
+    const editBtn = manage ? `<button class="icon-btn edit" data-edit-spieler="${escapeHtml(s.id)}" title="Rollen bearbeiten">✎</button>` : "";
+    return `<tr><td class="strong">${escapeHtml(s.name || "—")}</td><td>${chips}</td><td class="num">${editBtn}</td></tr>`;
+  }).join("");
+  wrap.innerHTML = `<table class="data-table">
+    <thead><tr><th>Spieler</th><th>Rollen</th><th class="num"></th></tr></thead>
+    <tbody>${rows || `<tr><td colspan="3" class="muted">Noch keine Spieler im Kader.</td></tr>`}</tbody>
+  </table>`;
+}
+function renderRechteMatrix() {
+  const wrap = document.getElementById("rechte-matrix-wrap");
+  if (!wrap) return;
+  const header = `<th>Rolle</th>` + RECHTE_BEREICHE.map((b) => `<th>${escapeHtml(RECHTE_BEREICH_LABELS[b] || b)}</th>`).join("");
+  const rows = KADER_ROLLEN.map((r) => {
+    const rechte = ROLLEN_RECHTE[r.id] || [];
+    const cells = RECHTE_BEREICHE.map((b) => `<td class="num">${rechte.includes(b) ? "✓" : "–"}</td>`).join("");
+    return `<tr><td class="strong">${escapeHtml(r.label)}</td>${cells}</tr>`;
+  }).join("");
+  wrap.innerHTML = `<table class="data-table"><thead><tr>${header}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
 // ---------- Meta / Changelog / Nutzer ----------
 function renderMeta() {
   const m = appData.meta || {};
@@ -1742,6 +1779,8 @@ function renderAll() {
   renderKasse();
   renderTeamCloud();
   renderTeamAdmin();
+  renderKaderRollenUebersicht();
+  renderRechteMatrix();
   renderMeta();
   renderVersionInfo();
   applyEditVisibility();
@@ -1758,7 +1797,7 @@ function switchTab(tab) {
   if (tab === "umfragen") renderUmfragen();
   if (tab === "kasse") renderKasse();
   if (tab === "teamcloud") renderTeamCloud();
-  if (tab === "einstellungen") { renderTeamAdmin(); renderMeta(); renderVersionInfo(); }
+  if (tab === "einstellungen") { renderTeamAdmin(); renderKaderRollenUebersicht(); renderRechteMatrix(); renderMeta(); renderVersionInfo(); }
 }
 
 // ---------- Gateway: Laden / Speichern / Konflikte ----------
@@ -2013,6 +2052,11 @@ function setupListeners() {
   document.getElementById("btn-save-team").addEventListener("click", saveTeam);
   document.getElementById("btn-delete-team").addEventListener("click", deleteTeam);
   document.getElementById("team-modal").addEventListener("click", (e) => { if (e.target.id === "team-modal") closeTeamModal(); });
+
+  // Einstellungen: Rechte & Rollen
+  document.getElementById("rechte-kader-wrap").addEventListener("click", (e) => {
+    const ed = e.target.closest("[data-edit-spieler]"); if (ed) openSpielerModal(ed.dataset.editSpieler);
+  });
   document.getElementById("team-form").addEventListener("submit", (e) => { e.preventDefault(); saveTeam(); });
 
   // ESC schließt das oberste offene Modal
