@@ -1,4 +1,4 @@
-const APP_VERSION = "1.4";
+const APP_VERSION = "1.0";
 
 // TeamCloud: Server-Cap (muss zum admin-worker.js-Limit passen) + rein informative
 // Kontingent-Anzeige (kein hartes Limit über die 10 MB je Datei hinaus).
@@ -91,17 +91,6 @@ const ROLLEN_RECHTE = {
 
 const APP_CHANGELOG = [
   {
-    version: "1.4",
-    groups: [
-      {
-        title: "Versionsbadge",
-        items: [
-          "Der Versionshinweis oben neben dem Titel ist jetzt anklickbar und führt direkt zu dieser Änderungsübersicht im Einstellungen-Tab."
-        ]
-      }
-    ]
-  },
-  {
     version: "1.0",
     groups: [
       {
@@ -144,7 +133,8 @@ const APP_CHANGELOG = [
         title: "Rollen & Rechte",
         items: [
           "Kader-Spieler können mehrere Rollen bekommen (Trainer, Co-Trainer, Torwart-/Athletiktrainer, Betreuer, Kassenwart, Nachwuchsleiter, Fördertrainer u. a.) mit granularen Verwalten-Rechten je Bereich, statt nur Admin/Bearbeiter. Bearbeiten-Rechte auf Tool-Ebene werden über die Gruppenverwaltung der Tools-Übersicht vergeben.",
-          "Einstellungen-Tab: Bereich „Rollen im Kader“ zeigt alle Kadermitglieder der Mannschaft mit ihren Rollen auf einen Blick (mit Direktzugriff zum Bearbeiten); Referenztabelle „Rollen-Rechte“ zeigt, welchen Bereich jede Rolle verwalten darf."
+          "Einstellungen-Tab: Bereich „Rollen im Kader“ zeigt alle Kadermitglieder der Mannschaft mit ihren Rollen auf einen Blick (mit Direktzugriff zum Bearbeiten); Referenztabelle „Rollen-Rechte“ zeigt, welchen Bereich jede Rolle verwalten darf, und ist für echte Tools-Admins direkt bearbeitbar.",
+          "Kader-Einträge mit verknüpftem Tools-Konto zeigen zusätzlich Lizenz und betreute Mannschaft(en) aus dem zentralen Trainerprofil an (rein informativ)."
         ]
       },
       {

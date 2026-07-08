@@ -13,7 +13,8 @@ Vereinsinterne Alternative zu SpielerPlus (Teamorganisation, An-/Abmeldungen zu 
 - **Umfragen** mit Einfach- oder Mehrfachauswahl, Ergebnis-Balken und Abstimm-Übersicht.
 - **Mannschaftskasse** mit Strafenkatalog, Beiträgen, manuellen Buchungen (je Kategorie filterbar), Stornos (Audit-Spur statt Löschen), Kassenstand und offenen Beträgen.
 - **Dateien (TeamCloud)**: Dokumente/Bilder je Mannschaft hoch- und herunterladen.
-- **Rollen je Spieler** (Trainer, Co-Trainer, Torwart-/Athletiktrainer, Betreuer, Kassenwart, Nachwuchsleiter, Fördertrainer u. a.) mit granularen Verwalten-Rechten je Bereich statt nur "Admin/Bearbeiter".
+- **Rollen je Spieler** (Trainer, Co-Trainer, Torwart-/Athletiktrainer, Betreuer, Kassenwart, Nachwuchsleiter, Fördertrainer u. a.) mit granularen Verwalten-Rechten je Bereich statt nur "Admin/Bearbeiter". Echte Tools-Admins können die Rechte-Matrix je Rolle im Einstellungen-Tab direkt bearbeiten.
+- **Zentrales Trainerprofil**: Kader-Einträge mit verknüpftem Tools-Konto zeigen automatisch Lizenz und betreute Mannschaft(en) aus dem zentralen Trainerprofil an (rein informativ).
 
 ## Rechte
 
