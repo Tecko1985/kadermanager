@@ -1117,7 +1117,8 @@ async function oeffneRegistrierung() {
   regAblaufAt = res.expiresAt || 0;
 
   inhalt.innerHTML = `
-    <p style="margin:0 0 10px;">Schick den Spielern diesen Link — am einfachsten direkt in die Mannschaftsgruppe. Er gilt <strong>${Math.round((res.ttlSeconds || 900) / 60)} Minuten</strong> und öffnet nur diesen Kader.</p>
+    <p style="margin:0 0 12px;">Lass die Spieler diesen Code mit der Handy-Kamera scannen — oder schick den Link in die Mannschaftsgruppe. Beides gilt <strong>${Math.round((res.ttlSeconds || 900) / 60)} Minuten</strong> und öffnet nur diesen Kader.</p>
+    <div id="reg-qr" style="display:flex;justify-content:center;margin:4px 0 14px;"></div>
     <div class="toolbar" style="gap:8px;flex-wrap:wrap;">
       <button class="btn small" id="btn-reg-teilen">Link teilen</button>
       <button class="btn secondary small" id="btn-reg-kopieren">Link kopieren</button>
@@ -1125,6 +1126,14 @@ async function oeffneRegistrierung() {
     </div>
     <p class="muted" id="reg-status" style="margin-top:12px;"></p>
   `;
+
+  // QR bewusst mit reichlich Modulgröße: der Trainer hält das Handy hoch, mehrere
+  // Spieler scannen aus ~1-2 m Abstand. Version 10 (57x57) braucht dafür Fläche.
+  try {
+    QRCodeMini.zeichneQrCode(document.getElementById("reg-qr"), url, 6);
+  } catch (e) {
+    document.getElementById("reg-qr").innerHTML = `<span class="muted">QR-Code konnte nicht erzeugt werden — bitte den Link nutzen.</span>`;
+  }
 
   document.getElementById("btn-reg-kopieren").addEventListener("click", async () => {
     try {
