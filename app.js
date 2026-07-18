@@ -1594,10 +1594,16 @@ function renderKasse() {
     else if (b.bezahlt) bezahltAus += b.betrag;
   });
   const stand = bezahltEin - bezahltAus;
-  document.getElementById("kasse-summary").innerHTML = `
-    <div class="summary-card strong"><div class="sc-label">Kassenstand</div><div class="sc-value">${escapeHtml(fmtEuro(stand))}</div><div class="sc-sub">bezahlte Ein- minus Ausgaben</div></div>
-    <div class="summary-card warn"><div class="sc-label">Offene Beträge</div><div class="sc-value">${escapeHtml(fmtEuro(offenEin))}</div><div class="sc-sub">noch nicht bezahlt</div></div>
-    <div class="summary-card"><div class="sc-label">Buchungen</div><div class="sc-value">${alleBuchungen.filter(aktiv).length}</div></div>`;
+  // Spieler bekommen vom Server nur ihre EIGENEN Buchungen (kmSpielerSicht im
+  // admin-worker). Ein daraus berechneter "Kassenstand" wäre schlicht falsch — er
+  // sähe aus wie der Stand der Mannschaftskasse, wäre aber die eigene Bilanz.
+  // Deshalb für sie andere Beschriftungen statt einer irreführenden Zahl.
+  document.getElementById("kasse-summary").innerHTML = nurSelbstbedienung()
+    ? `<div class="summary-card warn"><div class="sc-label">Dein offener Betrag</div><div class="sc-value">${escapeHtml(fmtEuro(offenEin))}</div><div class="sc-sub">noch nicht bezahlt</div></div>
+       <div class="summary-card"><div class="sc-label">Deine Buchungen</div><div class="sc-value">${alleBuchungen.filter(aktiv).length}</div><div class="sc-sub">nur deine eigenen</div></div>`
+    : `<div class="summary-card strong"><div class="sc-label">Kassenstand</div><div class="sc-value">${escapeHtml(fmtEuro(stand))}</div><div class="sc-sub">bezahlte Ein- minus Ausgaben</div></div>
+       <div class="summary-card warn"><div class="sc-label">Offene Beträge</div><div class="sc-value">${escapeHtml(fmtEuro(offenEin))}</div><div class="sc-sub">noch nicht bezahlt</div></div>
+       <div class="summary-card"><div class="sc-label">Buchungen</div><div class="sc-value">${alleBuchungen.filter(aktiv).length}</div></div>`;
 
   // Filter (Kategorie + Stornos-Sichtbarkeit)
   document.querySelectorAll("#kasse-kategorie-filter button").forEach((b) => b.classList.toggle("active", b.dataset.kategorie === kasseKategorieFilter));
