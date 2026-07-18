@@ -121,28 +121,25 @@ const APP_CHANGELOG = [
         ]
       },
       {
+        title: "Spieler-Registrierung per QR-Code",
+        items: [
+          "Ein Trainer mit Kader-Bearbeiten-Recht öffnet im Kader-Tab ein zeitlich begrenztes Anmelde-Fenster (Standard 15 Minuten) für die Mannschaft — z. B. direkt im Training.",
+          "Der dabei erzeugte QR-Code bzw. Link führt zu einer eigenen, schlanken Anmeldeseite: Spieler ohne eigenes Tools-Konto wählen dort ihren Namen aus dem Kader, vergeben ein eigenes Passwort und sind danach sofort angemeldet — ohne dass der Trainer jedes Konto einzeln anlegen muss."
+        ]
+      },
+      {
         title: "Rollen & Rechte",
         items: [
           "Kader-Spieler können mehrere Rollen bekommen (Trainer, Co-Trainer, Torwart-/Athletiktrainer, Betreuer, Kassenwart, Nachwuchsleiter, Fördertrainer u. a.) mit granularen Verwalten-Rechten je Bereich, statt nur Admin/Bearbeiter. Bearbeiten-Rechte auf Tool-Ebene werden über die Gruppenverwaltung der Tools-Übersicht vergeben.",
           "Einstellungen-Tab: Bereich „Rollen im Kader“ zeigt alle Kadermitglieder der Mannschaft mit ihren Rollen auf einen Blick (mit Direktzugriff zum Bearbeiten); Referenztabelle „Rollen-Rechte“ zeigt, welchen Bereich jede Rolle verwalten darf, und ist für echte Tools-Admins direkt bearbeitbar.",
-          "Kader-Einträge mit verknüpftem Tools-Konto zeigen zusätzlich Lizenz und betreute Mannschaft(en) aus dem zentralen Trainerprofil an (rein informativ)."
+          "Kader-Einträge mit verknüpftem Tools-Konto zeigen zusätzlich Lizenz und betreute Mannschaft(en) aus dem zentralen Trainerprofil an (rein informativ).",
+          "Spieler ohne Bearbeiten-Recht können weiterhin ihre eigenen Einträge speichern (Zu-/Absage, eigene Aufgaben, Fahrgemeinschaft, Urlaub/Krank) — über einen eingeschränkten Weg, der nur die eigene Änderung überträgt statt der kompletten Mannschaftsdatei. In der Mannschaftskasse sehen sie entsprechend nur ihre eigene offene Summe und ihre eigenen Buchungen statt des gesamten Kassenstands."
         ]
       },
       {
         title: "Speicherung",
         items: [
           "Automatische Nextcloud-Synchronisierung über die zentrale Anmeldung (Tools-Übersicht) — kein separates Passwort nötig; gleichzeitige Änderungen von zwei Geräten werden erkannt und gemeldet."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.1",
-    groups: [
-      {
-        title: "Dateien",
-        items: [
-          "Tab „Dateien“ (TeamCloud) entfernt — Dateien-Verwaltung wird nicht benötigt."
         ]
       }
     ]
