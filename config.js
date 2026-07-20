@@ -1,4 +1,4 @@
-const APP_VERSION = "1.1";
+const APP_VERSION = "1.0";
 
 // Server-Cap fürs Datei-Gateway (muss zum admin-worker.js-Limit passen).
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
@@ -91,33 +91,6 @@ const ROLLEN_RECHTE = {
 
 const APP_CHANGELOG = [
   {
-    version: "1.2",
-    groups: [
-      {
-        title: "Speichern",
-        items: [
-          "Beim zügigen Bearbeiten – etwa beim Tippen im Spielbericht, beim Ändern des Strafenkatalogs in der Mannschaftskasse oder beim schnellen Anlegen mehrerer Termine – erschien wiederholt die Meldung, die Daten seien zwischenzeitlich auf einem anderen Gerät geändert worden, obwohl niemand sonst gearbeitet hat. Die zuletzt gemachte Eingabe ging dabei verloren.",
-          "Es wird jetzt immer nur ein Speichervorgang gleichzeitig ausgeführt; Änderungen, die währenddessen anfallen, werden unmittelbar danach automatisch nachgespeichert."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.1",
-    groups: [
-      {
-        title: "Gruppen über Mannschaftsgrenzen hinweg",
-        items: [
-          "Neben Mannschaften lassen sich jetzt Gruppen anlegen (z. B. Torwartgruppe, Athletikgruppe): dieselben Termine, Zu-/Absagen, Umfragen und Auswertungen wie bei einer Mannschaft, nur ohne eigene Kasse.",
-          "Ein Spieler kann gleichzeitig in seiner Mannschaft und in einer oder mehreren Gruppen stehen.",
-          "Beim Anlegen eines Spielers in einer Gruppe lässt sich ein vorhandener Spieler aus einer Mannschaft übernehmen — Name und Kontoverknüpfung kommen mit, sodass es dieselbe Person bleibt.",
-          "Meldet sich ein Spieler über den QR-Code für eine zweite Mannschaft oder Gruppe an und ist bereits angemeldet, wird sein bestehendes Konto verknüpft, statt ein zweites anzulegen. Vorher wird angezeigt, mit welchem Konto verknüpft wird.",
-          "Die Untergruppen innerhalb eines Termins heißen zur Unterscheidung jetzt „Trainingsgruppen“."
-        ]
-      }
-    ]
-  },
-  {
     version: "1.0",
     groups: [
       {
@@ -127,6 +100,16 @@ const APP_CHANGELOG = [
           "Zu jedem Termin sagen die Spieler zu, ab oder „unsicher“ — mit Bilanz auf einen Blick, wer kommt.",
           "Spieler mit eigenem Tools-Konto verknüpfen sich per „Das bin ich“ selbst mit ihrem Kaderplatz und melden sich dann selbst an/ab; Trainer und Betreuer können für alle anderen eintragen.",
           "Je Termin zusätzlich: Aufgaben (an Spieler verteilen, abhaken), Gruppen (Trainings-Untergruppen), ein Video-Link und eine leichtgewichtige Fahrgemeinschaft (Plätze anbieten/suchen); bei Spielen ein Spielbericht mit Ergebnis, Torschützen und Freitext-Bericht."
+        ]
+      },
+      {
+        title: "Gruppen über Mannschaftsgrenzen hinweg",
+        items: [
+          "Neben Mannschaften lassen sich Gruppen anlegen (z. B. Torwartgruppe, Athletikgruppe): dieselben Termine, Zu-/Absagen, Umfragen und Auswertungen wie bei einer Mannschaft, nur ohne eigene Kasse.",
+          "Ein Spieler kann gleichzeitig in seiner Mannschaft und in einer oder mehreren Gruppen stehen.",
+          "Beim Anlegen eines Spielers in einer Gruppe lässt sich ein vorhandener Spieler aus einer Mannschaft übernehmen — Name und Kontoverknüpfung kommen mit, sodass es dieselbe Person bleibt.",
+          "Meldet sich ein Spieler über den QR-Code für eine zweite Mannschaft oder Gruppe an und ist bereits angemeldet, wird sein bestehendes Konto verknüpft, statt ein zweites anzulegen. Vorher wird angezeigt, mit welchem Konto verknüpft wird.",
+          "Die Untergruppen innerhalb eines Termins heißen zur Unterscheidung „Trainingsgruppen“."
         ]
       },
       {
