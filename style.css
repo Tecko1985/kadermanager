@@ -452,3 +452,8 @@ tr.storniert .kategorie-tag { text-decoration: none; }
   .termin-main { flex-direction: column; }
   .termin-bilanz { border-top: 1px solid var(--border); padding-top: 10px; }
 }
+
+/* Rechte Nav-Gruppe (Einstellungen/Verwaltung + Info). Das margin haengt
+   am Wrapper, damit die Gruppe rechts bleibt, auch wenn einzelne Buttons
+   fuer Nicht-Admins ausgeblendet sind. */
+nav .nav-right { margin-left: auto; display: flex; gap: inherit; }
