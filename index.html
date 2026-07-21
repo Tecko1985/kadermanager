@@ -40,6 +40,7 @@
       <button data-tab="statistik">Statistik</button>
       <button data-tab="umfragen">Umfragen</button>
       <button data-tab="kasse">Kasse</button>
+      <button data-tab="info">Info</button>
       <button data-tab="einstellungen" style="margin-left:auto;">Einstellungen</button>
     </nav>
 
@@ -156,6 +157,20 @@
         <div class="empty-state hidden" id="no-team-kasse">Noch keine Mannschaft angelegt — im Tab „Einstellungen“ eine Mannschaft erstellen.</div>
       </section>
 
+      <!-- ---------- Info ---------- -->
+      <section class="tab-section" id="tab-info">
+        <div class="card">
+          <h2>Über den Kadermanager <span class="version-badge" id="version-badge-2"></span></h2>
+          <p class="muted">Termine, Kader, Umfragen und Mannschaftskasse — die Vereinsalternative zu SpielerPlus.</p>
+          <div class="form-grid" id="meta-view"></div>
+          <p class="muted" id="einstellungen-user" style="margin-top:10px;"></p>
+        </div>
+        <div class="card">
+          <h2>Änderungen</h2>
+          <div id="changelog-list"></div>
+        </div>
+      </section>
+
       <!-- ---------- Einstellungen ---------- -->
       <section class="tab-section" id="tab-einstellungen">
         <div class="card">
@@ -179,15 +194,6 @@
           <p class="muted" style="margin-bottom:10px;">Welchen Bereich eine Rolle verwalten darf. Hat ein Spieler noch keine Rolle zugewiesen, darf er vorübergehend überall mitverwalten — erst eine zugewiesene Rolle schränkt gezielt ein.</p>
           <p class="muted hidden" id="rechte-matrix-admin-hint" style="margin-top:-6px; margin-bottom:10px;">Häkchen setzen/entfernen, um einer Rolle einen Bereich zu geben oder zu entziehen — wirkt sofort mannschaftsübergreifend für alle Nutzer.</p>
           <div class="table-scroll" id="rechte-matrix-wrap"></div>
-        </div>
-        <div class="card">
-          <h2>Info <span class="version-badge" id="version-badge-2"></span></h2>
-          <div class="form-grid" id="meta-view"></div>
-          <p class="muted" id="einstellungen-user" style="margin-top:10px;"></p>
-        </div>
-        <div class="card">
-          <h2>Änderungen</h2>
-          <div id="changelog-list"></div>
         </div>
       </section>
 
@@ -500,6 +506,6 @@
   <script src="qrcode.js?v=1.0"></script>
   <script src="config.js?v=1.0"></script>
   <script src="db.js?v=1.0"></script>
-  <script src="app.js?v=1.0"></script>
+  <script src="app.js?v=1.1"></script>
 </body>
 </html>
