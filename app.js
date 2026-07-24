@@ -1891,7 +1891,7 @@ function renderKaderRollenUebersicht() {
 function renderRechteMatrix() {
   const wrap = document.getElementById("rechte-matrix-wrap");
   if (!wrap) return;
-  const manage = !!(currentUser && currentUser.isAdmin);
+  const manage = !!(currentUser && (currentUser.isAdmin || currentUser.canAdmin));
   const hint = document.getElementById("rechte-matrix-admin-hint");
   if (hint) hint.classList.toggle("hidden", !manage);
   const header = `<th>Rolle</th>` + RECHTE_BEREICHE.map((b) => `<th>${escapeHtml(RECHTE_BEREICH_LABELS[b] || b)}</th>`).join("");
@@ -1907,10 +1907,12 @@ function renderRechteMatrix() {
   }).join("");
   wrap.innerHTML = `<table class="data-table"><thead><tr>${header}</tr></thead><tbody>${rows}</tbody></table>`;
 }
-// Nur echte ToolsUebersicht-Admins dürfen die Rechte-Matrix ändern (systemweite,
-// mannschaftsübergreifende Einstellung, kein team-gebundenes hasRecht()-Bereich).
+// Die Rechte-Matrix ändern darf, wer global Admin ist ODER die Administrieren-
+// Stufe für den Kadermanager hat (canAdmin aus me, dritte Rechte-Stufe der
+// Tools-Übersicht) — systemweite, mannschaftsübergreifende Einstellung, deshalb
+// bewusst NICHT bloß canEdit/hasRecht().
 function toggleRollenRecht(rolle, bereich, on) {
-  if (!currentUser || !currentUser.isAdmin) return;
+  if (!currentUser || !(currentUser.isAdmin || currentUser.canAdmin)) return;
   if (!KADER_ROLLEN.some((r) => r.id === rolle) || !RECHTE_BEREICHE.includes(bereich)) return;
   const cur = new Set(rollenRechte(rolle));
   if (on) cur.add(bereich); else cur.delete(bereich);
