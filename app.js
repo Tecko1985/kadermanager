@@ -301,6 +301,12 @@ function canManage() {
   if (!currentUser) return false;
   return currentUser.isAdmin || !!currentUser.canEdit;
 }
+// Administrieren-Ebene (dritte Rechte-Stufe): der Einstellungen-Tab (Team-/Rollen-/
+// Rechte-Verwaltung) ist Administratoren vorbehalten (2026-07-24).
+function canAdmin() {
+  if (!currentUser) return false;
+  return currentUser.isAdmin || !!currentUser.canAdmin;
+}
 function myUsername() { return currentUser && currentUser.username ? currentUser.username : null; }
 function myPlayerId(team) {
   const u = myUsername();
@@ -1966,6 +1972,10 @@ function applyEditVisibility() {
   // für Spielerkonten (kein canManage) nie und die sähen den Tab weiterhin.
   const kasseBtn = document.querySelector('nav button[data-tab="kasse"]');
   if (kasseBtn) kasseBtn.classList.toggle("hidden", istGruppe(currentTeam()));
+  // Einstellungen-Tab = Administrieren-Ebene (2026-07-24): nur für Admins sichtbar. VOR dem
+  // frühen Return, damit es auch für Spieler-/Nur-Seher-Konten greift (Info bleibt sichtbar).
+  const einstBtn = document.querySelector('nav button[data-tab="einstellungen"]');
+  if (einstBtn) einstBtn.classList.toggle("hidden", !canAdmin());
   document.querySelectorAll(".editor-only").forEach((el) => el.classList.toggle("hidden", !editable));
   if (!editable) return;
   const team = currentTeam();
